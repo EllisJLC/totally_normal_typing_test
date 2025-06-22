@@ -67,7 +67,7 @@ function startGame () {
   
   userTypedLine = document.getElementById('textbox');
 
-    currentLine.value = lyricsArray[lineNumber]
+    currentLine.innerHTML = lyricsArray[lineNumber]
 
 }
 
