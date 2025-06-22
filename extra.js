@@ -8,22 +8,29 @@ function randomMath() {
     function rng_b (){ // pick variable b
         return Math.floor(Math.random() * Math.floor(9));
     } 
-    var calc_type = rng_x();
+    var calc_type = parseInt(rng_x());
     if (calc_type == 1){ // addition
-        var ans = rng_a + rng_b;
-        return ["what is " + rng_a + " plus " + rng_b,ans];
+        var a = parseInt(rng_a);
+        var b = parseInt(rng_b);
+        var ans = parseInt(a + b);
+        return ["what is " + a + " plus " + b,ans];
     }
     else if (calc_type == 2){ // subtraction
-        var ans = rng_a - rng_b;
-        return ["what is " + rng_a + " minus " + rng_b,ans];
+        var a = parseInt(rng_a);
+        var b = parseInt(rng_b);
+        var ans = parseInt(a - b);
+        return ["what is " + a + " minus " + b,ans];
     }
     else if (calc_type == 3){ // multiplication
-        var ans = rng_a * rng_b;
-        return ["what is " + rng_a + " times " + rng_b,ans]
+        var a = parseInt(rng_a);
+        var b = parseInt(rng_b);
+        var ans = parseInt(a * b);
+        return ["what is " + a + " times " + b,ans]
     }
     else if (calc_type == 4){ // division
-        var product = rng_a * rng_b;
-        var ans = rng_a;
-        return ["what is " + product + " divided by " + rng_b,ans]
+        var a = parseInt(rng_a);
+        var b = parseInt(rng_b);
+        var product = parseInt(a * b);
+        return ["what is " + product + " divided by " + b,a]
     }
 }
