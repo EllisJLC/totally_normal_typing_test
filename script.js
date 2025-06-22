@@ -127,6 +127,9 @@ function quickTime() {
   let question = questAns[0];
   let answer = questAns[1];
 
+  y = document.getElementById('rick')
+  y.play();
+
   let x = setInterval(function() {
     userTypedLine.value = userTypedLine.value.slice(0, -1)
     if (userTypedLine.value == '' && lineNumber > 0) {
@@ -157,6 +160,7 @@ function quickTime() {
         } else {
           clearInterval(x); 
           userTypedLine.focus();
+          y.pause();
           resolve(value);
         }
       }).catch((err) => {
@@ -169,10 +173,6 @@ function quickTime() {
       //Swal.fire('Done!', `You typed: ${result.value}`, 'success');
     }
   });
-}
-
-function deleteCharacters(){
-  
 }
 
 function randomMath() {
