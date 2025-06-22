@@ -57,12 +57,23 @@ const lyricsArray = [
 const completedLines = [];
 
 
+
+
 const currentLine = document.getElementById('lyrics');
-let progress = -1;
 let lineNumber = 0;
 const userTypedLine = document.getElementById('textbox');
 
+let y;
+
 function startGame () {
+
+  let interval = Math.round(Math.random()*10000) + 20000;
+
+  y = setInterval(() => {
+    quickTime();
+    interval = Math.round(Math.random()*10000) + 20000;
+  }, interval);
+
   userTypedLine.focus();
   userTypedLine.value = '';
   document.getElementById('bootin').style.visibility = 'hidden';
@@ -111,10 +122,17 @@ function revertLine () {
 }
 
 function quickTime() {
+
   let questAns = randomMath();
   let question = questAns[0];
   let answer = questAns[1];
 
+  let x = setInterval(function() {
+    userTypedLine.value = userTypedLine.value.slice(0, -1)
+    if (userTypedLine.value == '' && lineNumber > 0) {
+      revertLine();
+    }
+  }, 200)
 
   Swal.fire({
     title: ''+question,
@@ -137,6 +155,8 @@ function quickTime() {
         if (value != answer) {
           reject('Wrong Answer');
         } else {
+          clearInterval(x); 
+          userTypedLine.focus();
           resolve(value);
         }
       }).catch((err) => {
@@ -152,10 +172,7 @@ function quickTime() {
 }
 
 function deleteCharacters(){
-    console.log("fuction called");
-    resultObject = document.getElementById('textbox');
-    resultObject.value = resultObject.value.slice(0, -1);
-
+  
 }
 
 function randomMath() {
