@@ -58,46 +58,34 @@ const completedLines = [];
 
 
 const currentLine = document.getElementById('lyrics');
-  
+let progress = -1;
+let lineNumber = 0;
 const userTypedLine = document.getElementById('textbox');
 
 function startGame () {
   console.log("asdasd")
-    
-  const lineNumber = 0;
-
   document.getElementById('bootin').style.visibility = 'hidden';
 
   currentLine.innerHTML = lyricsArray[lineNumber]
 
-    userTypedLine.addEventListener("keydown", (event) => {
-      const sound = document.getElementById('1');
+    userTypedLine.addEventListener("keyup", (event) => {
+      const index = Math.floor(Math.random() * 2);
+      index.toString();
+
+      const sound = document.getElementById(index);
       sound.play();
-      control = currentLine.innerHTML.splice(0, userTypedLine.innerHTML .length-1);
-      console.log(control);
 
-        // if (event.value === '' && lineNumber > 0) {
-        // if (completedLines.length > 0) {
-        //     event.value = completedLine
-        //     completedLines.slice(-1);
-        //     lineNumber--;
-        //     currentLine.value = lyricsArray[lineNumber];
-        // }
-        // }
+      console.log(currentLine.innerHTML)
+      console.log(event)
 
-        // if (control != event.value) {
-        // userTypedLine.style.color = 'ff0000';
-        // } else {
-        // userTypedLine.style.color = '000000';
-
-        //     if (control === currentLine === event.value) {
-        //     lineNumber++;
-        //     currentLine.value = lyricsArray[lineNumber];
-        //     completedLines.push(event.value);
-        //     event.value = '';
-        // }
-
-        // }
+        if (userTypedLine.value == '' && lineNumber > 0 && event.key === "Backspace") {
+        if (completedLines.length > 0) {
+          revertLine();
+        }
+        }
+          if (currentLine.innerHTML === userTypedLine.value) {
+            advanceLine();
+        }
 
     })
 
@@ -107,14 +95,14 @@ function advanceLine() {
   lineNumber++;
   currentLine.innerHTML = lyricsArray[lineNumber];
   completedLines.push(userTypedLine.innerHTML);
-  userTypedLine.innerHTML = '';
+  userTypedLine.value = '';
 }
 
 function revertLine () {
   lineNumber--;
   currentLine.innerHTML = lyricsArray[lineNumber];
   completedLines.slice(0, -1);
-  userTypedLine.innerHTML = completedLines[-1];
+  userTypedLine.value = lyricsArray[lineNumber].slice(0, -1);
 }
 
 const quickTime = () => {
