@@ -57,9 +57,9 @@ const lyricsArray = [
 const completedLines = [];
 
 function startGame () {
-    console.log("asdasd")
+  console.log("asdasd")
     
-    const lineNumber = 0;
+  const lineNumber = 0;
 
   document.getElementById('bootin').style.visibility = 'hidden';
 
@@ -69,39 +69,76 @@ function startGame () {
 
     currentLine.innerHTML = lyricsArray[lineNumber]
 
+    userTypedLine.addEventListener("change", (event) => {
+        userTypedLine = event.value;
+        control = currentLine.splice(0, event.value.length-1);
+
+        if (event.value === '' && lineNumber > 0) {
+        if (completedLines.length > 0) {
+            event.value = completedLines[-1];
+            completedLines.slice(-1);
+            lineNumber--;
+            currentLine.value = lyricsArray[lineNumber];
+        }
+        }
+
+        if (control != event.value) {
+        userTypedLine.style.color = 'ff0000';
+        } else {
+        userTypedLine.style.color = '000000';
+
+            if (control === currentLine === event.value) {
+            lineNumber++;
+            currentLine.value = lyricsArray[lineNumber];
+            completedLines.push(event.value);
+            event.value = '';
+        }
+
+        }
+
+    });
+
+
 }
 
 
-    // userTypedLine.addEventListener("change", (event) => {
-    //     userTypedLine = event.value;
-    //     control = currentLine.splice(0, event.value.length-1);
 
-    //     if (event.value === '' && lineNumber > 0) {
-    //     if (completedLines.length > 0) {
-    //         event.value = completedLines[-1];
-    //         completedLines.slice(-1);
-    //         lineNumber--;
-    //         currentLine.value = lyricsArray[lineNumber];
-    //     }
-    //     }
+function quickTime(){
+  
 
-    //     if (control != event.value) {
-    //     userTypedLine.style.color = 'ff0000';
-    //     } else {
-    //     userTypedLine.style.color = '000000';
+  Swal.fire({
+    title: 'Enter your name',
+    input: 'text',
+    inputPlaceholder: '',
+    confirmButtonText: 'enter',
+    showCancelButton: false,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: true,
+    inputValidator: (value) => {
+      if (!value) {
+        return 'Wrong input';
+      }
+    },
+    preConfirm: (value) => {
 
-    //         if (control === currentLine === event.value) {
-    //         lineNumber++;
-    //         currentLine.value = lyricsArray[lineNumber];
-    //         completedLines.push(event.value);
-    //         event.value = '';
-    //     }
-
-    //     }
-
-    // })
-
-const quickTime = () => {
+      // Optional: extra validation or async checks
+      return new Promise((resolve, reject) => {
+        if (value.length < 2) {
+          reject('Name must be at least 2 characters.');
+        } else {
+          resolve(value);
+        }
+      }).catch((err) => {
+        Swal.showValidationMessage(err);
+      });
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      console.log('User entered:', result.value);
+      Swal.fire('Done!', `You typed: ${result.value}`, 'success');
+    }
+  });
 
 }
 
