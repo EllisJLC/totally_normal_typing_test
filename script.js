@@ -56,89 +56,56 @@ const lyricsArray = [
 ]
 const completedLines = [];
 
+
+const currentLine = document.getElementById('lyrics');
+let progress = -1;
+let lineNumber = 0;
+const userTypedLine = document.getElementById('textbox');
+
 function startGame () {
   console.log("asdasd")
-    
-  const lineNumber = 0;
-
   document.getElementById('bootin').style.visibility = 'hidden';
 
-  currentLine = document.getElementById('lyrics');
-  
-  userTypedLine = document.getElementById('textbox');
+  currentLine.innerHTML = lyricsArray[lineNumber]
 
-    currentLine.innerHTML = lyricsArray[lineNumber]
+    userTypedLine.addEventListener("keyup", (event) => {
+      const index = Math.floor(Math.random() * 2);
+      index.toString();
 
-    userTypedLine.addEventListener("change", (event) => {
-        userTypedLine = event.value;
-        control = currentLine.splice(0, event.value.length-1);
+      const sound = document.getElementById(index);
+      sound.play();
 
-        if (event.value === '' && lineNumber > 0) {
+      console.log(currentLine.innerHTML)
+      console.log(event)
+
+        if (userTypedLine.value == '' && lineNumber > 0 && event.key === "Backspace") {
         if (completedLines.length > 0) {
-            event.value = completedLines[-1];
-            completedLines.slice(-1);
-            lineNumber--;
-            currentLine.value = lyricsArray[lineNumber];
+          revertLine();
         }
         }
-
-        if (control != event.value) {
-        userTypedLine.style.color = 'ff0000';
-        } else {
-        userTypedLine.style.color = '000000';
-
-            if (control === currentLine === event.value) {
-            lineNumber++;
-            currentLine.value = lyricsArray[lineNumber];
-            completedLines.push(event.value);
-            event.value = '';
+          if (currentLine.innerHTML === userTypedLine.value) {
+            advanceLine();
         }
 
-        }
-
-    });
-
+    })
 
 }
 
+function advanceLine() {
+  lineNumber++;
+  currentLine.innerHTML = lyricsArray[lineNumber];
+  completedLines.push(userTypedLine.innerHTML);
+  userTypedLine.value = '';
+}
 
+function revertLine () {
+  lineNumber--;
+  currentLine.innerHTML = lyricsArray[lineNumber];
+  completedLines.slice(0, -1);
+  userTypedLine.value = lyricsArray[lineNumber].slice(0, -1);
+}
 
-function quickTime(){
-  
-
-  Swal.fire({
-    title: 'Enter your name',
-    input: 'text',
-    inputPlaceholder: '',
-    confirmButtonText: 'enter',
-    showCancelButton: false,
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    allowEnterKey: true,
-    inputValidator: (value) => {
-      if (!value) {
-        return 'Wrong input';
-      }
-    },
-    preConfirm: (value) => {
-
-      // Optional: extra validation or async checks
-      return new Promise((resolve, reject) => {
-        if (value.length < 2) {
-          reject('Name must be at least 2 characters.');
-        } else {
-          resolve(value);
-        }
-      }).catch((err) => {
-        Swal.showValidationMessage(err);
-      });
-    }
-  }).then((result) => {
-    if (result.isConfirmed) {
-      console.log('User entered:', result.value);
-      Swal.fire('Done!', `You typed: ${result.value}`, 'success');
-    }
-  });
+const quickTime = () => {
 
 }
 
