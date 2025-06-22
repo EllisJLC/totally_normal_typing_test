@@ -64,13 +64,18 @@ const userTypedLine = document.getElementById('textbox');
 
 function startGame () {
   userTypedLine.focus();
+  userTypedLine.value = '';
   document.getElementById('bootin').style.visibility = 'hidden';
 
   currentLine.innerHTML = lyricsArray[lineNumber]
 
     userTypedLine.addEventListener("keyup", (event) => {
-      const index = Math.floor(Math.random() * 15);
+      const index = Math.floor(Math.random() * 21);
       index.toString();
+
+      if (index >= 20) {
+        userTypedLine.value = userTypedLine.value.slice(0, -1)
+      }
 
       const sound = document.getElementById(index);
       sound.play();
