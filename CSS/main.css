@@ -3,6 +3,8 @@ h1 {
 	display: block;
 	margin: 60;
 	text-align: center;
+    font-size: 90px;
+    /* background-color: grey; */
 }
 
 .container {
@@ -10,11 +12,35 @@ h1 {
     position: relative;
 }
 
-.center {
+.centerlyrics {
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    font-size: 70px;
+    width: 1200px;
+    text-align: center;
+}
+
+.centertextbox{
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 65px;
+    width: 1200px;
+}
+
+.centerstart{
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 70px;
 }

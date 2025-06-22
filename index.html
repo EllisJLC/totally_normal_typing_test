@@ -11,12 +11,15 @@
 </head>
 <body>
   <h1>Totally Normal Typing Test</h1>
-  <div id="lyrics"></div>
-  <input type="text" name="input" id="textbox">
+  <div>
+    <div class="centerlyrics" id="lyrics"></div>
+    <input class="centertextbox" type="text" name="input" id="textbox">
+  </div>
+  
   <br>
-  <button onclick="deleteCharacters();" id="deletebutton">deleteCharacters() test</button>
-  <button onclick="startGame();" id="bootin">start game</button>
-  <button onclick="quickTime();">QTE</button>
+  <!-- <button onclick="deleteCharacters();" id="deletebutton">deleteCharacters() test</button> -->
+  <button class="centerstart" onclick="startGame();" id="bootin">start game</button>
+  <!-- <button onclick="quickTime();">QTE</button> -->
 
   <audio id="rick" src="./new_folder/rick.mp3" loop="true"></audio>
 

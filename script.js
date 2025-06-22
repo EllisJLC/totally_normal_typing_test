@@ -157,6 +157,7 @@ function quickTime() {
       return new Promise((resolve, reject) => {
         if (value != answer) {
           reject('Wrong Answer');
+          quickTime();
         } else {
           clearInterval(x); 
           userTypedLine.focus();
