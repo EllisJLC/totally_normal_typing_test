@@ -11,23 +11,16 @@ soundEffects.map((file) => {
 console.log(soundEffects);
 
 const startGame = () => {
-  const lineNumber = 0;
-  currentLine = document.getElementById("lyrics");
-  userTypedLine = document.getElementById("input");
 
-  currentLine.value = lyricsArray[lineNumber]
-
-  userTypedLine.addEventListener("change", (event) => {
-    userTypedLine = event.value;
-  })
 }
 
 const quickTime = () => {
 
 }
 
-const deleteCharacters = () => {
+function deleteCharacters(){
+    console.log("fuction called");
+    resultObject = document.getElementById('textbox');
+    resultObject.value = resultObject.value.slice(0, -1);
 
 }
-
-document.getElementById("start_button").addEventListener("click", startGame);
