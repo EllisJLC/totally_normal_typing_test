@@ -62,9 +62,9 @@ const currentLine = document.getElementById('lyrics');
 const userTypedLine = document.getElementById('textbox');
 
 function startGame () {
-    console.log("asdasd")
+  console.log("asdasd")
     
-    const lineNumber = 0;
+  const lineNumber = 0;
 
   document.getElementById('bootin').style.visibility = 'hidden';
 
