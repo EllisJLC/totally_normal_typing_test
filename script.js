@@ -56,50 +56,66 @@ const lyricsArray = [
 ]
 const completedLines = [];
 
+
+const currentLine = document.getElementById('lyrics');
+  
+const userTypedLine = document.getElementById('textbox');
+
 function startGame () {
-    console.log("asdasd")
+  console.log("asdasd")
     
-    const lineNumber = 0;
+  const lineNumber = 0;
 
   document.getElementById('bootin').style.visibility = 'hidden';
 
-  currentLine = document.getElementById('lyrics');
-  
-  userTypedLine = document.getElementById('textbox');
+  currentLine.innerHTML = lyricsArray[lineNumber]
 
-    currentLine.innerHTML = lyricsArray[lineNumber]
+    userTypedLine.addEventListener("keydown", (event) => {
+      const sound = document.getElementById('1');
+      sound.play();
+      control = currentLine.innerHTML.splice(0, userTypedLine.innerHTML .length-1);
+      console.log(control);
+
+        // if (event.value === '' && lineNumber > 0) {
+        // if (completedLines.length > 0) {
+        //     event.value = completedLine
+        //     completedLines.slice(-1);
+        //     lineNumber--;
+        //     currentLine.value = lyricsArray[lineNumber];
+        // }
+        // }
+
+        // if (control != event.value) {
+        // userTypedLine.style.color = 'ff0000';
+        // } else {
+        // userTypedLine.style.color = '000000';
+
+        //     if (control === currentLine === event.value) {
+        //     lineNumber++;
+        //     currentLine.value = lyricsArray[lineNumber];
+        //     completedLines.push(event.value);
+        //     event.value = '';
+        // }
+
+        // }
+
+    })
 
 }
 
+function advanceLine() {
+  lineNumber++;
+  currentLine.innerHTML = lyricsArray[lineNumber];
+  completedLines.push(userTypedLine.innerHTML);
+  userTypedLine.innerHTML = '';
+}
 
-    // userTypedLine.addEventListener("change", (event) => {
-    //     userTypedLine = event.value;
-    //     control = currentLine.splice(0, event.value.length-1);
-
-    //     if (event.value === '' && lineNumber > 0) {
-    //     if (completedLines.length > 0) {
-    //         event.value = completedLines[-1];
-    //         completedLines.slice(-1);
-    //         lineNumber--;
-    //         currentLine.value = lyricsArray[lineNumber];
-    //     }
-    //     }
-
-    //     if (control != event.value) {
-    //     userTypedLine.style.color = 'ff0000';
-    //     } else {
-    //     userTypedLine.style.color = '000000';
-
-    //         if (control === currentLine === event.value) {
-    //         lineNumber++;
-    //         currentLine.value = lyricsArray[lineNumber];
-    //         completedLines.push(event.value);
-    //         event.value = '';
-    //     }
-
-    //     }
-
-    // })
+function revertLine () {
+  lineNumber--;
+  currentLine.innerHTML = lyricsArray[lineNumber];
+  completedLines.slice(0, -1);
+  userTypedLine.innerHTML = completedLines[-1];
+}
 
 const quickTime = () => {
 
