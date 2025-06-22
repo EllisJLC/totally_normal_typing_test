@@ -63,13 +63,13 @@ let lineNumber = 0;
 const userTypedLine = document.getElementById('textbox');
 
 function startGame () {
-  console.log("asdasd")
+  userTypedLine.focus();
   document.getElementById('bootin').style.visibility = 'hidden';
 
   currentLine.innerHTML = lyricsArray[lineNumber]
 
     userTypedLine.addEventListener("keyup", (event) => {
-      const index = Math.floor(Math.random() * 2);
+      const index = Math.floor(Math.random() * 15);
       index.toString();
 
       const sound = document.getElementById(index);
@@ -105,8 +105,45 @@ function revertLine () {
   userTypedLine.value = lyricsArray[lineNumber].slice(0, -1);
 }
 
-const quickTime = () => {
+function quickTime() {
+  let questAns = randomMath();
+  let question = questAns[0];
+  let answer = questAns[1];
 
+
+  Swal.fire({
+    title: ''+question,
+    input: 'text',
+    inputPlaceholder: 'answer here',
+    confirmButtonText: 'enter',
+    showCancelButton: false,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: true,
+    inputValidator: (value) => {
+      if (!value) {
+        return 'Wrong Answer';
+      }
+    },
+    preConfirm: (value) => {
+
+      // Optional: extra validation or async checks
+      return new Promise((resolve, reject) => {
+        if (value != answer) {
+          reject('Wrong Answer');
+        } else {
+          resolve(value);
+        }
+      }).catch((err) => {
+        Swal.showValidationMessage(err);
+      });
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      console.log('User entered:', result.value);
+      //Swal.fire('Done!', `You typed: ${result.value}`, 'success');
+    }
+  });
 }
 
 function deleteCharacters(){
@@ -115,3 +152,39 @@ function deleteCharacters(){
     resultObject.value = resultObject.value.slice(0, -1);
 
 }
+
+function randomMath() {
+    function rng_x (){ 
+        return Math.floor(Math.random() * 4); // 0 to 4
+    }
+
+    function rng_a (){ 
+        return Math.floor(Math.random() * 9); // 0 to 8
+    } 
+
+    function rng_b (){ 
+        return Math.floor(Math.random() * 9); // 0 to 8
+    } 
+
+    const calc_type = rng_x()+1;
+
+    const a = rng_a();
+    const b = rng_b();
+
+    if (calc_type === 1) { // addition
+        const ans = a + b;
+        return [`What is ${a} plus ${b}?`, ans];
+    } else if (calc_type === 2) { // subtraction
+        const ans = a - b;
+        return [`What is ${a} minus ${b}?`, ans];
+    } else if (calc_type === 3) { // multiplication
+        const ans = a * b;
+        return [`What is ${a} times ${b}?`, ans];
+    } else if (calc_type === 4) { // division
+        const product = a * b;
+        return [`What is ${product} divided by ${b}?`, a]; // ensure b != 0 ideally
+    } else {
+        console.log(calc_type);
+        return [`Invalid type or unused case`, null];
+    }
+  }
