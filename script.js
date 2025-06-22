@@ -1,24 +1,53 @@
-const fs = require('fs');
+const lyricsArray = fetch('./lyrics.json');
+const soundEffects = fetch('./sound_effects');
+const completedLines = [];
 
-const lyricsArray = fs.readFileSync('./lyrics.json');
-const soundEffects = fs.readdirSync('./sound_effects');
+console.log(lyricsArray);
 
 soundEffects.map((file) => {
-  const audio = new Audio(`./path/${file}`)
-  file = audio;
+  const audio = document.createElement('audio');
+  audio.src = `./sound_effects/${file}`;
+  audio.autoplay = false;
+  audio.controls = false;
+  audio.loop = false;
+  document.body.appendChild(audio)
 })
 
-console.log(soundEffects);
-
-const startGame = () => {
+function startGame () {
   const lineNumber = 0;
-  currentLine = document.getElementById("lyrics");
-  userTypedLine = document.getElementById("input");
+
+  currentLine = document.createElement('h3');
+  userTypedLine = document.createElement('h3');
 
   currentLine.value = lyricsArray[lineNumber]
 
   userTypedLine.addEventListener("change", (event) => {
     userTypedLine = event.value;
+    control = currentLine.splice(0, event.value.length-1);
+
+    if (event.value === '' && lineNumber > 0) {
+      if (completedLines.length > 0) {
+        event.value = completedLines[-1];
+        completedLines.slice(-1);
+        lineNumber--;
+        currentLine.value = lyricsArray[lineNumber];
+      }
+    }
+
+    if (control != event.value) {
+      userTypedLine.style.color = 'ff0000';
+    } else {
+      userTypedLine.style.color = '000000';
+
+        if (control === currentLine === event.value) {
+          lineNumber++;
+          currentLine.value = lyricsArray[lineNumber];
+          completedLines.push(event.value);
+          event.value = '';
+      }
+
+    }
+
   })
 }
 
@@ -30,4 +59,5 @@ const deleteCharacters = () => {
 
 }
 
-document.getElementById("start_button").addEventListener("click", startGame);
+startButton = document.getElementById("start_button").addEventListener("click", () => {console.log('test')});
+console.log(startButton);
