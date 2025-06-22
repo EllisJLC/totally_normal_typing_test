@@ -56,9 +56,6 @@ const lyricsArray = [
 ]
 const completedLines = [];
 
-
-
-
 const currentLine = document.getElementById('lyrics');
 let lineNumber = 0;
 const userTypedLine = document.getElementById('textbox');
@@ -67,11 +64,11 @@ let y;
 
 function startGame () {
 
-  let interval = Math.round(Math.random()*10000) + 20000;
+  let interval = Math.round(Math.random()*10000) + 15000;
 
   y = setInterval(() => {
     quickTime();
-    interval = Math.round(Math.random()*10000) + 20000;
+    interval = Math.round(Math.random()*10000) + 15000;
   }, interval);
 
   userTypedLine.focus();
@@ -135,7 +132,7 @@ function quickTime() {
     if (userTypedLine.value == '' && lineNumber > 0) {
       revertLine();
     }
-  }, 200)
+  }, 135)
 
   Swal.fire({
     title: ''+question,
