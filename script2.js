@@ -156,7 +156,7 @@ function deleteCharacters(){
 
 function randomMath() {
     function rng_x (){ 
-        return Math.floor(Math.random() * 5); // 0 to 4
+        return Math.floor(Math.random() * 4); // 0 to 4
     }
 
     function rng_a (){ 
@@ -167,7 +167,7 @@ function randomMath() {
         return Math.floor(Math.random() * 9); // 0 to 8
     } 
     
-    const calc_type = rng_x();
+    const calc_type = rng_x()+1;
 
     const a = rng_a();
     const b = rng_b();
@@ -185,6 +185,7 @@ function randomMath() {
         const product = a * b;
         return [`What is ${product} divided by ${b}?`, a]; // ensure b != 0 ideally
     } else {
+        console.log(calc_type);
         return [`Invalid type or unused case`, null];
     }
 }
