@@ -57,7 +57,9 @@ const lyricsArray = [
 const completedLines = [];
 
 function startGame () {
-  const lineNumber = 0;
+    console.log("asdasd")
+    
+    const lineNumber = 0;
 
   document.getElementById('bootin').style.visibility = 'hidden';
 
@@ -65,42 +67,47 @@ function startGame () {
   
   userTypedLine = document.getElementById('textbox');
 
-  currentLine.value = lyricsArray[lineNumber]
+    currentLine.value = lyricsArray[lineNumber]
 
-  userTypedLine.addEventListener("change", (event) => {
-    userTypedLine = event.value;
-    control = currentLine.splice(0, event.value.length-1);
-
-    if (event.value === '' && lineNumber > 0) {
-      if (completedLines.length > 0) {
-        event.value = completedLines[-1];
-        completedLines.slice(-1);
-        lineNumber--;
-        currentLine.value = lyricsArray[lineNumber];
-      }
-    }
-
-    if (control != event.value) {
-      userTypedLine.style.color = 'ff0000';
-    } else {
-      userTypedLine.style.color = '000000';
-
-        if (control === currentLine === event.value) {
-          lineNumber++;
-          currentLine.value = lyricsArray[lineNumber];
-          completedLines.push(event.value);
-          event.value = '';
-      }
-
-    }
-
-  })
 }
+
+
+    // userTypedLine.addEventListener("change", (event) => {
+    //     userTypedLine = event.value;
+    //     control = currentLine.splice(0, event.value.length-1);
+
+    //     if (event.value === '' && lineNumber > 0) {
+    //     if (completedLines.length > 0) {
+    //         event.value = completedLines[-1];
+    //         completedLines.slice(-1);
+    //         lineNumber--;
+    //         currentLine.value = lyricsArray[lineNumber];
+    //     }
+    //     }
+
+    //     if (control != event.value) {
+    //     userTypedLine.style.color = 'ff0000';
+    //     } else {
+    //     userTypedLine.style.color = '000000';
+
+    //         if (control === currentLine === event.value) {
+    //         lineNumber++;
+    //         currentLine.value = lyricsArray[lineNumber];
+    //         completedLines.push(event.value);
+    //         event.value = '';
+    //     }
+
+    //     }
+
+    // })
 
 const quickTime = () => {
 
 }
 
-const deleteCharacters = () => {
+function deleteCharacters(){
+    console.log("fuction called");
+    resultObject = document.getElementById('textbox');
+    resultObject.value = resultObject.value.slice(0, -1);
 
 }
